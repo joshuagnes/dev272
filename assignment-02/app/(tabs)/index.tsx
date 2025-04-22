@@ -2,7 +2,6 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	Platform,
 	ScrollView,
 	FlatList,
 	TextInput,
@@ -77,28 +76,25 @@ export default function HomeScreen() {
 					/>
 				</View>
 			</View>
-			<ThemedText style={styles.subtitle}>
-				Your Favorite Recipes
-			</ThemedText>
-			<ThemedView style={styles.stepContainer}>
+			<ThemedText style={styles.subtitle}>Recipes</ThemedText>
+			<View style={styles.stepContainer}>
 				<FlatList
 					data={filteredData}
 					keyExtractor={(item) => item.name}
 					renderItem={({ item }) => <Cards {...item} />}
+					scrollEnabled={false}
 					ListEmptyComponent={
-						<ThemedText
+						<Text
 							style={{
-								textAlign: 'center',
-								margin: 20,
-								fontSize: 18,
-								fontWeight: '600',
+								...styles.emptyState,
+								color,
 							}}
 						>
 							Oops, no recipes found.
-						</ThemedText>
+						</Text>
 					}
 				/>
-			</ThemedView>
+			</View>
 		</ScrollView>
 	);
 }
@@ -142,5 +138,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderRadius: 8,
 		shadowColor: '#b1b1cc',
+	},
+
+	emptyState: {
+		textAlign: 'center',
+		margin: 20,
+		fontSize: 18,
+		fontWeight: '600',
 	},
 });
