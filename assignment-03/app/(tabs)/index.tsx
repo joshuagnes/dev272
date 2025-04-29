@@ -41,7 +41,7 @@ export default function HomeScreen() {
 
 	return (
 		<Box className="flex-1 p-4">
-			<Heading className="text-3xl self-center font-bold mb-4">
+			<Heading className="text-3xl self-center font-bold">
 				Recipes
 			</Heading>
 			<View

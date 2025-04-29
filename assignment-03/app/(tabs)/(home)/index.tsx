@@ -15,18 +15,20 @@ import recipes from '../../../data/recipes.json';
 import filter from 'lodash.filter';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
+import { useRecipes } from '@/context/RecipesContext';
 
 export default function HomeScreen() {
 	const [searchInput, setSearchInput] = useState('');
-	const [filteredData, setFilteredData] = useState(recipes.recipes);
+	const { recipes } = useRecipes();
+	const [filteredData, setFilteredData] = useState(recipes);
 
 	const handleSearch = () => {
 		if (!searchInput.trim()) {
-			setFilteredData(recipes.recipes);
+			setFilteredData(recipes);
 			return;
 		}
 		const formattedQuery = searchInput.toLowerCase();
-		const filtered = filter(recipes.recipes, (recipe: { name: string }) =>
+		const filtered = filter(recipes, (recipe: { name: string }) =>
 			recipe.name.toLowerCase().includes(formattedQuery)
 		);
 		setFilteredData(filtered);
@@ -41,9 +43,7 @@ export default function HomeScreen() {
 
 	return (
 		<Box className="flex-1 p-4">
-			<Heading className="text-3xl self-center font-bold">
-				Recipes
-			</Heading>
+			<Heading className="text-3xl self-center">Recipes</Heading>
 			<View
 				style={[
 					{ shadowColor, borderColor: shadowColor },
@@ -62,7 +62,7 @@ export default function HomeScreen() {
 						setSearchInput(query);
 						// Handle search input
 						if (query.trim() === '') {
-							setFilteredData(recipes.recipes);
+							setFilteredData(recipes);
 						}
 					}}
 				/>
