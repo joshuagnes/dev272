@@ -84,7 +84,16 @@ export default function HomeScreen() {
 				<FlatList
 					data={filteredData}
 					keyExtractor={(item) => item.name}
-					renderItem={({ item }) => <Cards {...item} />}
+					renderItem={({ item }) => (
+						<Cards
+							name={item.name}
+							description={item.description}
+							ingredients={item.ingredients}
+							instructions={item.instructions}
+							time={item.time}
+							link={item.link}
+						/>
+					)}
 					ListEmptyComponent={
 						<Text
 							style={{

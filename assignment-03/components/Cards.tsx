@@ -5,11 +5,13 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import { HoverEffect } from 'react-native-gesture-handler';
 import { Link, LinkText } from './ui/link';
 import { useRouter } from 'expo-router';
+import { Button, ButtonText } from './ui/button';
 
 interface CardProps {
 	name: string;
 	description: string;
 	ingredients: string[];
+	instructions: string[];
 	time: {
 		prep: number;
 		cook: number;
@@ -21,6 +23,7 @@ const Card: React.FC<CardProps> = ({
 	name,
 	description,
 	ingredients,
+	instructions,
 	time,
 	link,
 }) => {
@@ -32,7 +35,14 @@ const Card: React.FC<CardProps> = ({
 	const handleLinkPress = () => {
 		router.push({
 			pathname: '/(tabs)/(home)/[title]',
-			params: { title: link },
+			params: {
+				title: name,
+				description,
+				ingredients: JSON.stringify(ingredients),
+				instructions: JSON.stringify(instructions),
+				prepTime: time.prep.toString(),
+				cookTime: time.cook.toString(),
+			},
 		});
 	};
 
@@ -47,17 +57,21 @@ const Card: React.FC<CardProps> = ({
 			<Text style={[styles.description, { color }]}>
 				Description: {description}
 			</Text>
-			<Text style={[styles.ingredients, { color }]}>
-				Ingredients: {ingredients.join(', ')}
-			</Text>
+
 			<Text style={[styles.time, { color }]}>
 				Time: Prep {time.prep} mins, Cook {time.cook} mins
 			</Text>
+			<Text style={[styles.ingredients, { color }]}>
+				{/* Ingredients: {ingredients.join(', ')} */}
+			</Text>
+
 			<Link
 				className="flex-row self-center justify-center"
 				onPress={handleLinkPress}
 			>
-				<LinkText>See Details</LinkText>
+				<LinkText className="bg-indigo-400 text-gray-50 rounded-xl p-2">
+					See Details
+				</LinkText>
 			</Link>
 			{/* <TouchableOpacity
 				style={styles.button}
@@ -92,7 +106,7 @@ const styles = StyleSheet.create({
 	},
 	description: {
 		fontSize: 16,
-		marginBottom: 14,
+		marginBottom: 10,
 		flexShrink: 1,
 		flexWrap: 'wrap',
 	},
