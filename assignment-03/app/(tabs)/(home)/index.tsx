@@ -2,16 +2,13 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	ScrollView,
 	FlatList,
 	TextInput,
 	Button,
 } from 'react-native';
-import { useState } from 'react';
-import { ThemedText } from '@/components/ThemedText';
+import { useEffect, useState } from 'react';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import Cards from '@/components/Cards';
-import recipes from '../../../data/recipes.json';
+import RecipeCards from '@/components/RecipeCards';
 import filter from 'lodash.filter';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
@@ -20,6 +17,7 @@ import { useRecipes } from '@/context/RecipesContext';
 export default function HomeScreen() {
 	const [searchInput, setSearchInput] = useState('');
 	const { recipes } = useRecipes();
+
 	const [filteredData, setFilteredData] = useState(recipes);
 
 	const handleSearch = () => {
@@ -34,15 +32,11 @@ export default function HomeScreen() {
 		setFilteredData(filtered);
 	};
 
-	const contains = (recipeName: string, query: string) => {
-		return recipeName.includes(query);
-	};
-
 	const color = useThemeColor({}, 'text');
 	const shadowColor = useThemeColor({}, 'shadowColor');
 
 	return (
-		<Box className="flex-1 p-4">
+		<Box className="flex-1 p-4 dark:bg-zinc-800">
 			<Heading className="text-3xl self-center">Recipes</Heading>
 			<View
 				style={[
@@ -85,7 +79,7 @@ export default function HomeScreen() {
 					data={filteredData}
 					keyExtractor={(item) => item.name}
 					renderItem={({ item }) => (
-						<Cards
+						<RecipeCards
 							name={item.name}
 							description={item.description}
 							ingredients={item.ingredients}

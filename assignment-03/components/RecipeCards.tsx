@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { HoverEffect } from 'react-native-gesture-handler';
 import { Link, LinkText } from './ui/link';
 import { useRouter } from 'expo-router';
 import { Button, ButtonText } from './ui/button';
+import { Text } from './ui/text';
+import { Card } from '@/components/ui/card';
 
 interface CardProps {
 	name: string;
@@ -19,7 +19,7 @@ interface CardProps {
 	link: string;
 }
 
-const Card: React.FC<CardProps> = ({
+const RecipeCards: React.FC<CardProps> = ({
 	name,
 	description,
 	ingredients,
@@ -27,9 +27,7 @@ const Card: React.FC<CardProps> = ({
 	time,
 	link,
 }) => {
-	const backgroundColor = useThemeColor({}, 'background');
 	const color = useThemeColor({}, 'text');
-	const shadowColor = useThemeColor({}, 'shadowColor');
 	const router = useRouter();
 
 	const handleLinkPress = () => {
@@ -47,12 +45,7 @@ const Card: React.FC<CardProps> = ({
 	};
 
 	return (
-		<View
-			style={[
-				{ backgroundColor, shadowColor, borderColor: shadowColor },
-				styles.card,
-			]}
-		>
+		<Card size="md" variant="elevated" className="m-2 rounded-lg">
 			<Text style={[styles.name, { color }]}>{name}</Text>
 			<Text style={[styles.description, { color }]}>
 				Description: {description}
@@ -69,21 +62,15 @@ const Card: React.FC<CardProps> = ({
 				className="flex-row self-center justify-center"
 				onPress={handleLinkPress}
 			>
-				<LinkText className="bg-indigo-400 text-gray-50 rounded-xl p-2">
+				<LinkText className="bg-indigo-400 text-gray-50 rounded-xl p-2 no-underline">
 					See Details
 				</LinkText>
 			</Link>
-			{/* <TouchableOpacity
-				style={styles.button}
-				onPress={() => console.log("Let's Cook!")}
-			>
-				<Text style={styles.buttonText}>Instructions</Text>
-			</TouchableOpacity> */}
-		</View>
+		</Card>
 	);
 };
 
-export default Card;
+export default RecipeCards;
 
 const styles = StyleSheet.create({
 	card: {

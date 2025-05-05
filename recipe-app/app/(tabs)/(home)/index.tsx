@@ -2,48 +2,42 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	ScrollView,
 	FlatList,
 	TextInput,
 	Button,
 } from 'react-native';
-import { useState } from 'react';
-import { ThemedText } from '@/components/ThemedText';
+import { useEffect, useState } from 'react';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import Cards from '@/components/Cards';
-import recipes from '../../data/recipes.json';
+import RecipeCards from '@/components/RecipeCards';
 import filter from 'lodash.filter';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
+import { useRecipes } from '@/context/RecipesContext';
 
 export default function HomeScreen() {
 	const [searchInput, setSearchInput] = useState('');
-	const [filteredData, setFilteredData] = useState(recipes.recipes);
+	const { recipes } = useRecipes();
+
+	const [filteredData, setFilteredData] = useState(recipes);
 
 	const handleSearch = () => {
 		if (!searchInput.trim()) {
-			setFilteredData(recipes.recipes);
+			setFilteredData(recipes);
 			return;
 		}
 		const formattedQuery = searchInput.toLowerCase();
-		const filtered = filter(recipes.recipes, (recipe: { name: string }) =>
+		const filtered = filter(recipes, (recipe: { name: string }) =>
 			recipe.name.toLowerCase().includes(formattedQuery)
 		);
 		setFilteredData(filtered);
-	};
-
-	const contains = (recipeName: string, query: string) => {
-		return recipeName.includes(query);
 	};
 
 	const color = useThemeColor({}, 'text');
 	const shadowColor = useThemeColor({}, 'shadowColor');
 
 	return (
-		<Box className="flex-1 p-4">
-			<Heading className="text-3xl self-center font-bold">
-				Recipes
-			</Heading>
+		<Box className="flex-1 p-4 dark:bg-zinc-800">
+			<Heading className="text-3xl self-center">Recipes</Heading>
 			<View
 				style={[
 					{ shadowColor, borderColor: shadowColor },
@@ -62,7 +56,7 @@ export default function HomeScreen() {
 						setSearchInput(query);
 						// Handle search input
 						if (query.trim() === '') {
-							setFilteredData(recipes.recipes);
+							setFilteredData(recipes);
 						}
 					}}
 				/>
@@ -80,12 +74,11 @@ export default function HomeScreen() {
 					/>
 				</View>
 			</View>
-
 			<View style={{ flex: 1 }}>
 				<FlatList
 					data={filteredData}
 					keyExtractor={(item) => item.name}
-					renderItem={({ item }) => <Cards {...item} />}
+					renderItem={({ item }) => <RecipeCards {...item} />}
 					ListEmptyComponent={
 						<Text
 							style={{
@@ -119,13 +112,13 @@ const styles = StyleSheet.create({
 		gap: 8,
 		marginBottom: 8,
 	},
-	// subtitle: {
-	// 	fontSize: 25,
-	// 	fontWeight: '600',
-	// 	marginBottom: 8,
-	// 	alignItems: 'center',
-	// 	textAlign: 'center',
-	// },
+	subtitle: {
+		fontSize: 25,
+		fontWeight: '600',
+		marginBottom: 8,
+		alignItems: 'center',
+		textAlign: 'center',
+	},
 	searchInput: {
 		height: 40,
 		width: '80%',
