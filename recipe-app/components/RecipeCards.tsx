@@ -1,33 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { Link, LinkText } from './ui/link';
 import { useRouter } from 'expo-router';
-import { Button, ButtonText } from './ui/button';
 import { Text } from './ui/text';
 import { Card } from '@/components/ui/card';
+import { useRecipes, Recipe } from '@/context/RecipesContext';
+import { Heading } from './ui/heading';
+import { Pressable } from './ui/pressable';
+import { FavouriteIcon, Icon } from './ui/icon';
 
-interface CardProps {
-	name: string;
-	description: string;
-	ingredients: string[];
-	instructions: string[];
-	time: {
-		prep: number;
-		cook: number;
-	};
-	link: string;
-}
-
-const RecipeCards: React.FC<CardProps> = ({
+const RecipeCards: React.FC<Recipe> = ({
 	name,
 	description,
 	ingredients,
 	instructions,
 	time,
-	link,
+	isFavorite,
 }) => {
-	const color = useThemeColor({}, 'text');
+	const { toggleFavorite } = useRecipes();
 	const router = useRouter();
 
 	const handleLinkPress = () => {
@@ -46,15 +35,24 @@ const RecipeCards: React.FC<CardProps> = ({
 
 	return (
 		<Card size="md" variant="elevated" className="m-2 rounded-lg">
-			<Text style={[styles.name, { color }]}>{name}</Text>
-			<Text style={[styles.description, { color }]}>
+			<Heading className="mb-2">{name}</Heading>
+			<Pressable onPress={() => toggleFavorite(name)}>
+				<Icon
+					as={FavouriteIcon}
+					size="xl"
+					className={`${
+						isFavorite ? 'text-red-500' : 'text-gray-500'
+					} absolute right-4 bottom-2`}
+				/>
+			</Pressable>
+			<Text className="text-md my-1 dark:text-white">
 				Description: {description}
 			</Text>
 
-			<Text style={[styles.time, { color }]}>
+			<Text className="text-md my-1 dark:text-white">
 				Time: Prep {time.prep} mins, Cook {time.cook} mins
 			</Text>
-			<Text style={[styles.ingredients, { color }]}>
+			<Text className="text-md my-1 dark:text-white">
 				{/* Ingredients: {ingredients.join(', ')} */}
 			</Text>
 
@@ -71,53 +69,3 @@ const RecipeCards: React.FC<CardProps> = ({
 };
 
 export default RecipeCards;
-
-const styles = StyleSheet.create({
-	card: {
-		padding: 16,
-		marginTop: 8,
-		marginBottom: 8,
-		borderRadius: 8,
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 4,
-		elevation: 5,
-	},
-	name: {
-		fontSize: 20,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
-	description: {
-		fontSize: 16,
-		marginBottom: 10,
-		flexShrink: 1,
-		flexWrap: 'wrap',
-	},
-	ingredients: {
-		fontSize: 16,
-		marginBottom: 12,
-	},
-	button: {
-		backgroundColor: '#7777d1',
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: 10,
-		borderRadius: 8,
-		marginTop: 8,
-		shadowColor: '#b1b1cc',
-	},
-	time: {
-		fontSize: 16,
-		marginBottom: 12,
-	},
-
-	buttonText: {
-		color: '#fff',
-		fontSize: 16,
-	},
-});

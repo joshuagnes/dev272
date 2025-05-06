@@ -30,7 +30,7 @@ export default function DetailsScreen() {
 
 	return (
 		<Box className="flex-1 p-4 dark:bg-zinc-800">
-			<ScrollView className="flex-1">
+			<ScrollView className="flex-1 mb-20">
 				<Heading size="xl" className="self-center mb-6">
 					{recipe.name}
 				</Heading>

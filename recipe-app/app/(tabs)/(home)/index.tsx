@@ -1,11 +1,4 @@
-import {
-	Text,
-	View,
-	StyleSheet,
-	FlatList,
-	TextInput,
-	Button,
-} from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import RecipeCards from '@/components/RecipeCards';
@@ -13,11 +6,13 @@ import filter from 'lodash.filter';
 import { Box } from '@/components/ui/box';
 import { Heading } from '@/components/ui/heading';
 import { useRecipes } from '@/context/RecipesContext';
+import { InputField, InputIcon, Input } from '@/components/ui/input';
+import { Button, ButtonText } from '@/components/ui/button';
+import { Text } from '@/components/ui/text';
 
 export default function HomeScreen() {
 	const [searchInput, setSearchInput] = useState('');
 	const { recipes } = useRecipes();
-
 	const [filteredData, setFilteredData] = useState(recipes);
 
 	const handleSearch = () => {
@@ -32,115 +27,66 @@ export default function HomeScreen() {
 		setFilteredData(filtered);
 	};
 
+	// Listen for changes in restaurant data
+	useEffect(() => {
+		if (searchInput === '') {
+			setFilteredData(recipes);
+		} else {
+			const filtered = filter(recipes, (recipe: { name: string }) =>
+				recipe.name.toLowerCase().includes(searchInput)
+			);
+			setFilteredData(filtered);
+		}
+	}, [recipes]);
+
 	const color = useThemeColor({}, 'text');
 	const shadowColor = useThemeColor({}, 'shadowColor');
 
 	return (
 		<Box className="flex-1 p-4 dark:bg-zinc-800">
-			<Heading className="text-3xl self-center">Recipes</Heading>
-			<View
-				style={[
-					{ shadowColor, borderColor: shadowColor },
-					styles.titleContainer,
-				]}
-			>
-				<TextInput
-					style={styles.searchInput}
-					placeholder="Search for recipes..."
-					clearButtonMode="always"
-					placeholderTextColor="#888"
-					autoCapitalize="none"
-					autoCorrect={false}
-					value={searchInput}
-					onChangeText={(query) => {
-						setSearchInput(query);
-						// Handle search input
-						if (query.trim() === '') {
-							setFilteredData(recipes);
-						}
-					}}
-				/>
-				<View
-					style={[
-						{ shadowColor, borderColor: shadowColor },
-						styles.button,
-					]}
+			<Heading className="text-3xl self-center mb-4">Recipes</Heading>
+			<View className="flex-row items-center space-x-2 mb-4">
+				<Input
+					variant="outline"
+					size="md"
+					className="bg-white dark:bg-zinc-900 w-80"
 				>
-					<Button
-						onPress={handleSearch}
-						title="Search"
-						color="#fff"
-						accessibilityLabel="Learn more about this purple button"
+					<InputField
+						className="text-lg"
+						placeholder="Search for recipes..."
+						value={searchInput}
+						onChangeText={(query) => {
+							setSearchInput(query);
+							if (query.trim() === '') {
+								setFilteredData(recipes);
+							}
+						}}
 					/>
-				</View>
+				</Input>
+
+				<Button
+					onPress={handleSearch}
+					accessibilityLabel="Search recipes"
+					className="px-4 mx-2 bg-indigo-500"
+				>
+					<ButtonText>Search</ButtonText>
+				</Button>
 			</View>
-			<View style={{ flex: 1 }}>
+
+			<View>
 				<FlatList
 					data={filteredData}
 					keyExtractor={(item) => item.name}
 					renderItem={({ item }) => <RecipeCards {...item} />}
 					ListEmptyComponent={
-						<Text
-							style={{
-								...styles.emptyState,
-								color,
-							}}
-						>
+						<Text className="text-center text-2xl p-4 text-gray-600 font-semibold">
 							Oops, no recipes found.
 						</Text>
 					}
-					contentContainerStyle={{ paddingBottom: 100 }}
+					contentContainerStyle={{ paddingBottom: 200 }}
+					showsVerticalScrollIndicator={false}
 				/>
 			</View>
 		</Box>
 	);
 }
-
-const styles = StyleSheet.create({
-	titleContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		gap: 8,
-		marginBottom: 20,
-		padding: 12,
-	},
-	// container: {
-	// 	flex: 1,
-	// 	padding: 16,
-	// },
-	stepContainer: {
-		gap: 8,
-		marginBottom: 8,
-	},
-	subtitle: {
-		fontSize: 25,
-		fontWeight: '600',
-		marginBottom: 8,
-		alignItems: 'center',
-		textAlign: 'center',
-	},
-	searchInput: {
-		height: 40,
-		width: '80%',
-		borderColor: '#ccc',
-		borderWidth: 1,
-		borderRadius: 8,
-		padding: 8,
-		backgroundColor: '#f9f9f9',
-	},
-	button: {
-		backgroundColor: '#7777d1',
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: 8,
-		shadowColor: '#b1b1cc',
-	},
-
-	emptyState: {
-		textAlign: 'center',
-		margin: 20,
-		fontSize: 18,
-		fontWeight: '600',
-	},
-});

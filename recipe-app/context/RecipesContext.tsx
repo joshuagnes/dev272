@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import recipesData from '../data/recipes.json';
 
-type Recipe = {
+export type Recipe = {
 	name: string;
 	description: string;
 	ingredients: string[];
@@ -10,8 +10,8 @@ type Recipe = {
 		prep: number;
 		cook: number;
 	};
-	link: string;
 	isFavorite?: boolean;
+	rating: number;
 };
 
 type RecipesContextType = {
