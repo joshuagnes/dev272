@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+	createContext,
+	useContext,
+	useState,
+	ReactNode,
+	useEffect,
+} from 'react';
 import recipesData from '../data/recipes.json';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type Recipe = {
 	name: string;
@@ -27,9 +34,38 @@ const RecipesContext = createContext<RecipesContextType | undefined>(undefined);
 export const RecipesProvider = ({ children }: { children: ReactNode }) => {
 	const [recipes, setRecipes] = useState<Recipe[]>(recipesData.recipes);
 
+	useEffect(() => {
+		const loadRecipes = async () => {
+			try {
+				const storedRecipes = await AsyncStorage.getItem('recipes');
+				if (storedRecipes) {
+					setRecipes(JSON.parse(storedRecipes));
+				}
+			} catch (err) {
+				console.error('Failed to load recipes:', err);
+			}
+		};
+
+		loadRecipes();
+	}, []);
+
 	// Add a new recipe
-	const addRecipe = (recipe: Recipe) => {
-		setRecipes((prev) => [...prev, recipe]);
+	// const addRecipe = (newRecipe: Recipe) => {
+	// 	setRecipes((prev) => [...prev, newRecipe]);
+	// };
+
+	const addRecipe = async (newRecipe: Recipe) => {
+		const updatedRecipes = [...recipes, newRecipe];
+		setRecipes((prev) => [...prev, newRecipe]);
+
+		try {
+			await AsyncStorage.setItem(
+				'recipes',
+				JSON.stringify(updatedRecipes)
+			);
+		} catch (err) {
+			console.error('Failed to save recipe:', err);
+		}
 	};
 
 	// Update an existing recipe by name

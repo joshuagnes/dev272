@@ -39,9 +39,6 @@ export default function HomeScreen() {
 		}
 	}, [recipes]);
 
-	const color = useThemeColor({}, 'text');
-	const shadowColor = useThemeColor({}, 'shadowColor');
-
 	return (
 		<Box className="flex-1 p-4 dark:bg-zinc-800">
 			<Heading className="text-3xl self-center mb-4">Recipes</Heading>

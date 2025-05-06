@@ -7,6 +7,7 @@ import { useRecipes, Recipe } from '@/context/RecipesContext';
 import { Heading } from './ui/heading';
 import { Pressable } from './ui/pressable';
 import { FavouriteIcon, Icon } from './ui/icon';
+import { number } from 'yup';
 
 const RecipeCards: React.FC<Recipe> = ({
 	name,
@@ -14,6 +15,7 @@ const RecipeCards: React.FC<Recipe> = ({
 	ingredients,
 	instructions,
 	time,
+	rating,
 	isFavorite,
 }) => {
 	const { toggleFavorite } = useRecipes();
@@ -29,6 +31,7 @@ const RecipeCards: React.FC<Recipe> = ({
 				instructions: JSON.stringify(instructions),
 				prepTime: time.prep.toString(),
 				cookTime: time.cook.toString(),
+				rating,
 			},
 		});
 	};
@@ -49,11 +52,12 @@ const RecipeCards: React.FC<Recipe> = ({
 				Description: {description}
 			</Text>
 
-			<Text className="text-md my-1 dark:text-white">
+			<Text className="text-md my-2 dark:text-white">
 				Time: Prep {time.prep} mins, Cook {time.cook} mins
 			</Text>
-			<Text className="text-md my-1 dark:text-white">
-				{/* Ingredients: {ingredients.join(', ')} */}
+
+			<Text className="text-md my-2 dark:text-white">
+				Rating: {rating}
 			</Text>
 
 			<Link

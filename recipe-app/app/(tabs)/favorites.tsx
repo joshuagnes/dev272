@@ -1,35 +1,35 @@
-import {
-	StyleSheet,
-	Image,
-	Platform,
-	ScrollView,
-	View,
-	Text,
-} from 'react-native';
+import { StyleSheet, Image, Platform, ScrollView } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Box } from '@/components/ui/box';
 
 export default function TabTwoScreen() {
 	return (
-		<ScrollView style={styles.container}>
-			<Text style={styles.subtitle}>Your favorite recipes</Text>
+		<ScrollView>
+			<ThemedView style={styles.titleContainer}>
+				<ThemedText type="title">Explore</ThemedText>
+			</ThemedView>
+			<ThemedText>
+				This app includes example code to help you get started.
+			</ThemedText>
 		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 16,
+	headerImage: {
+		color: '#808080',
+		bottom: -90,
+		left: -35,
+		position: 'absolute',
 	},
-	subtitle: {
-		fontSize: 25,
-		fontWeight: '600',
-		marginBottom: 8,
-		alignItems: 'center',
-		textAlign: 'center',
+	titleContainer: {
+		flexDirection: 'row',
+		gap: 8,
 	},
 });

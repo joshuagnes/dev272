@@ -1,9 +1,9 @@
 {
 	"expo": {
-		"name": "assignment-03",
+		"name": "recipe-app",
 		"owner": "shuyuwang",
 		"githubUrl": "https://github.com/joshuagnes/dev272.git",
-		"slug": "assignment-03",
+		"slug": "recipe-app",
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",

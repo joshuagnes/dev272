@@ -38,7 +38,7 @@ const RecipeSchema = Yup.object().shape({
 
 const AddRecipe = () => {
 	const navigation = useNavigation();
-	const { addRecipe } = useRecipes();
+	const { addRecipe, recipes } = useRecipes();
 
 	return (
 		<Box className="flex-1 p-4 dark:bg-neutral-950 ">
@@ -57,9 +57,21 @@ const AddRecipe = () => {
 						rating: 0,
 					}}
 					validationSchema={RecipeSchema}
-					onSubmit={(values, { resetForm }) => {
+					onSubmit={(values, { resetForm, setErrors }) => {
+						// Check if the recipe name already exists
+						const recipeExists = recipes.some(
+							(recipe) =>
+								recipe.name.toLowerCase() ===
+								values.name.toLowerCase()
+						);
+
+						if (recipeExists) {
+							// Set an error for the name field if it already exists
+							setErrors({ name: 'Recipe name already exists' });
+							return;
+						}
 						addRecipe({
-							// id: Date.now.toString(), //generate a unique id by timestamp
+							// id: Date.now().toString(), //generate a unique id by timestamp
 							name: values.name,
 							description: values.description,
 							ingredients: values.ingredients
@@ -67,8 +79,9 @@ const AddRecipe = () => {
 								.map((i) => i.trim()),
 							// Convert CSV string to array
 							instructions: values.instructions
-								.split(',')
-								.map((i) => i.trim()),
+								.split('.')
+								.map((step) => step.trim())
+								.filter(Boolean),
 							time: {
 								prep: Number(values.time.prep),
 								cook: Number(values.time.cook),
@@ -303,12 +316,36 @@ const AddRecipe = () => {
 												value.toString()
 											);
 										}}
-										className="mb-6"
+										className="mb-6 mt-2"
+										value={values.rating || 0}
+										accessibilityLabel="Rating Slider"
+										accessibilityHint="Slide to select a rating between 1-5"
+										accessibilityRole="adjustable"
+										accessibilityState={{
+											selected: values.rating > 0,
+										}}
+										accessibilityValue={{
+											min: 1,
+											max: 5,
+											now: values.rating || 0,
+										}}
+										accessibilityActions={[
+											{
+												name: 'increment',
+												label: 'Increase rating',
+											},
+											{
+												name: 'decrement',
+												label: 'decrease rating',
+											},
+										]}
 									>
 										<SliderTrack>
 											<SliderFilledTrack />
 										</SliderTrack>
-										<SliderThumb />
+										<SliderThumb>
+											<Text>{values.rating || 0}</Text>
+										</SliderThumb>
 									</Slider>
 								</Box>
 							</Box>

@@ -24,7 +24,7 @@
 				"cook": 15
 			},
 			"isFavorite": false,
-			"rating": 4
+			"rating": 4.5
 		},
 		{
 			"name": "Classic Cheeseburger",
@@ -77,7 +77,7 @@
 				"cook": 5
 			},
 			"isFavorite": false,
-			"rating": 4
+			"rating": 5
 		},
 		{
 			"name": "Avocado Toast",
@@ -154,7 +154,7 @@
 				"cook": 15
 			},
 			"isFavorite": false,
-			"rating": 4
+			"rating": 3.5
 		},
 		{
 			"name": "Tomato Basil Soup",
@@ -207,7 +207,7 @@
 				"cook": 15
 			},
 			"isFavorite": false,
-			"rating": 4
+			"rating": 5
 		},
 		{
 			"name": "Caprese Salad",
@@ -258,7 +258,7 @@
 				"cook": 20
 			},
 			"isFavorite": false,
-			"rating": 4
+			"rating": 4.5
 		}
 	]
 }
