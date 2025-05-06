@@ -17,24 +17,30 @@ import { ScrollView } from 'react-native';
 import { Textarea, TextareaInput } from '@/components/ui/textarea';
 
 // Validation schema for the restaurant form
-const RecipeSchema = Yup.object().shape({
-	name: Yup.string().required('Name is required'),
-	description: Yup.string().required('Description is required'),
-	ingredients: Yup.string().required('Ingredients are required'),
-	instructions: Yup.string().required('Instructions are required'),
-	time: Yup.object().shape({
-		prep: Yup.number()
-			.required('Prep time is required')
-			.typeError('Must be a number'),
-		cook: Yup.number()
-			.required('Cook time is required')
-			.typeError('Must be a number'),
-	}),
-	rating: Yup.number()
-		.min(1, 'Rating must be at least 1')
-		.max(5, 'Rating must be at most 5')
-		.required('Rating is required'),
-});
+const RecipeSchema = (existingNames: string[]) =>
+	Yup.object().shape({
+		name: Yup.string()
+			.required('Name is required')
+			.test('is-unique', 'Recipe name already exists', (value) => {
+				if (!value) return true;
+				return !existingNames.includes(value.toLowerCase());
+			}),
+		description: Yup.string().required('Description is required'),
+		ingredients: Yup.string().required('Ingredients are required'),
+		instructions: Yup.string().required('Instructions are required'),
+		time: Yup.object().shape({
+			prep: Yup.number()
+				.required('Prep time is required')
+				.typeError('Must be a number'),
+			cook: Yup.number()
+				.required('Cook time is required')
+				.typeError('Must be a number'),
+		}),
+		rating: Yup.number()
+			.min(1, 'Rating must be at least 1')
+			.max(5, 'Rating must be at most 5')
+			.required('Rating is required'),
+	});
 
 const AddRecipe = () => {
 	const navigation = useNavigation();
@@ -56,7 +62,9 @@ const AddRecipe = () => {
 						time: { prep: '', cook: '' },
 						rating: 0,
 					}}
-					validationSchema={RecipeSchema}
+					validationSchema={RecipeSchema(
+						recipes.map((r) => r.name.toLowerCase())
+					)}
 					onSubmit={(values, { resetForm, setErrors }) => {
 						// Check if the recipe name already exists
 						const recipeExists = recipes.some(
@@ -67,9 +75,10 @@ const AddRecipe = () => {
 
 						if (recipeExists) {
 							// Set an error for the name field if it already exists
-							setErrors({ name: 'Recipe name already exists' });
+							setErrors({ name: 'Recipe name already ' });
 							return;
 						}
+
 						addRecipe({
 							// id: Date.now().toString(), //generate a unique id by timestamp
 							name: values.name,
