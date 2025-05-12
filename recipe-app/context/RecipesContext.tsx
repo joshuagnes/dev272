@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import recipesData from '../data/recipes.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useGetRecipes } from '@/hooks/useGetRecipes';
 
 export type Recipe = {
 	name: string;
@@ -22,6 +23,7 @@ export type Recipe = {
 };
 
 type RecipesContextType = {
+	isLoading: boolean;
 	recipes: Recipe[];
 	setRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
 	addRecipe: (recipe: Recipe) => void;
@@ -32,7 +34,8 @@ type RecipesContextType = {
 const RecipesContext = createContext<RecipesContextType | undefined>(undefined);
 
 export const RecipesProvider = ({ children }: { children: ReactNode }) => {
-	const [recipes, setRecipes] = useState<Recipe[]>(recipesData.recipes);
+	const { data, isFetching } = useGetRecipes();
+	const [recipes, setRecipes] = useState<Recipe[]>([]);
 
 	useEffect(() => {
 		const loadRecipes = async () => {
@@ -88,9 +91,21 @@ export const RecipesProvider = ({ children }: { children: ReactNode }) => {
 		);
 	};
 
+	useEffect(() => {
+		if (data && !isFetching) {
+			console.log("Fetched data: ", data);
+			setRecipes(data as Recipe[])
+		}
+		if (isFetching) {
+			console.log("Fetching data...");
+		}
+
+	}, [data, isFetching])
+
 	return (
 		<RecipesContext.Provider
 			value={{
+				isLoading: isFetching,
 				recipes,
 				setRecipes,
 				addRecipe,

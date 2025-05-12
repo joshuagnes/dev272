@@ -10,6 +10,16 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, createContext } from 'react';
 import 'react-native-reanimated';
 import { RecipesProvider } from '@/context/RecipesContext';
+import {
+	QueryClient,
+	QueryClientProvider,
+	useQueryClient,
+} from '@tanstack/react-query';
+import { supabase } from '@/utils/supabase';
+import { AppState } from 'react-native';
+
+// prevent splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 type ThemeContextType = {
 	colorMode: ModeType;
@@ -18,14 +28,23 @@ type ThemeContextType = {
 
 export const ThemeContext = createContext<ThemeContextType>({
 	colorMode: 'light',
-	toggleColorMode: () => {},
+	toggleColorMode: () => { },
 });
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+const queryClient = new QueryClient();
+
+AppState.addEventListener('change', (state) => {
+	if (state === 'active') {
+		supabase.auth.startAutoRefresh()
+	} else {
+		supabase.auth.stopAutoRefresh()
+	}
+})
+
 
 export default function RootLayout() {
 	const [colorMode, setColorMode] = useState<ModeType>('light');
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	const toggleColorMode = async () => {
 		setColorMode((prev) => (prev === 'light' ? 'dark' : 'light'));
@@ -45,20 +64,44 @@ export default function RootLayout() {
 		return null;
 	}
 
+	// handel initial supabase auth
+	useEffect(() => {
+		if (isAuthenticated) {
+			return;
+		}
+
+		const autoSignin = async () => {
+			const { data, error } = await supabase.auth.signInWithPassword({
+				email: 'test@dev.com',
+				password: 'testtest',
+			});
+			if (error) {
+				console.log("Error signing in: ", error);
+			} else {
+				setIsAuthenticated(true);
+				console.log("Signed in use: ", data);
+			}
+		}
+		autoSignin();
+	}, [isAuthenticated]);
+
+
 	return (
-		<GluestackUIProvider mode={colorMode}>
-			<ThemeContext.Provider value={{ colorMode, toggleColorMode }}>
-				<RecipesProvider>
-					<Stack>
-						<Stack.Screen
-							name="(tabs)"
-							options={{ headerShown: false }}
-						/>
-						<Stack.Screen name="+not-found" />
-					</Stack>
-					<StatusBar style="auto" />
-				</RecipesProvider>
-			</ThemeContext.Provider>
-		</GluestackUIProvider>
+		<QueryClientProvider client={queryClient}>
+			<GluestackUIProvider mode={colorMode}>
+				<ThemeContext.Provider value={{ colorMode, toggleColorMode }}>
+					<RecipesProvider>
+						<Stack>
+							<Stack.Screen
+								name="(tabs)"
+								options={{ headerShown: false }}
+							/>
+							<Stack.Screen name="+not-found" />
+						</Stack>
+						<StatusBar style="auto" />
+					</RecipesProvider>
+				</ThemeContext.Provider>
+			</GluestackUIProvider></QueryClientProvider>
+
 	);
 }
