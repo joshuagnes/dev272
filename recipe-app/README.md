@@ -92,7 +92,9 @@ export const useTasks = () => {
 
 ## 💾 AsyncStorage Integration
 
-### AsyncStorage is used to persist specific pieces of data locally on the device.
+AsyncStorage is used to persist specific pieces of data locally on the device.
+
+### Caching Auth Tokens
 
 ```ts
 import AsyncStorage from '@react-native-async-storage/async-storage';
