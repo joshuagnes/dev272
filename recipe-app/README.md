@@ -61,16 +61,11 @@ export const supabase = createClient(
 );
 ```
 
-## Environment Variables: Create a .env file:
+## ⚡ Using React-Query
 
-EXPO_PUBLIC_SUPABASE_URL=your-supabase-url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+React Query is used for efficient server state management and caching.
 
-# ⚡ Using React-Query
-
-### React Query is used for efficient server state management and caching.
-
-## Fetching Tasks
+### Fetching Tasks
 
 ```ts
 import { useQuery } from '@tanstack/react-query';
