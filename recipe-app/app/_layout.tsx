@@ -58,11 +58,10 @@ export default function RootLayout() {
 		if (loaded) {
 			SplashScreen.hideAsync();
 		}
+
 	}, [loaded]);
 
-	if (!loaded) {
-		return null;
-	}
+
 
 	// handel initial supabase auth
 	useEffect(() => {
@@ -84,6 +83,10 @@ export default function RootLayout() {
 		}
 		autoSignin();
 	}, [isAuthenticated]);
+
+	if (!loaded) {
+		return null;
+	}
 
 
 	return (

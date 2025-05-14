@@ -5,7 +5,6 @@ import React, {
 	ReactNode,
 	useEffect,
 } from 'react';
-import recipesData from '../data/recipes.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useGetRecipes } from '@/hooks/useGetRecipes';
 
@@ -33,74 +32,83 @@ type RecipesContextType = {
 
 const RecipesContext = createContext<RecipesContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'recipes';
+
 export const RecipesProvider = ({ children }: { children: ReactNode }) => {
 	const { data, isFetching } = useGetRecipes();
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 
+	// Load recipes from local storage on first mount
 	useEffect(() => {
 		const loadRecipes = async () => {
 			try {
-				const storedRecipes = await AsyncStorage.getItem('recipes');
+				const storedRecipes = await AsyncStorage.getItem(STORAGE_KEY);
 				if (storedRecipes) {
 					setRecipes(JSON.parse(storedRecipes));
 				}
 			} catch (err) {
-				console.error('Failed to load recipes:', err);
+				console.error('Failed to load recipes from storage:', err);
 			}
 		};
 
 		loadRecipes();
 	}, []);
 
-	// Add a new recipe
-	// const addRecipe = (newRecipe: Recipe) => {
-	// 	setRecipes((prev) => [...prev, newRecipe]);
-	// };
+	// Update local storage when Supabase data is fetched
+	useEffect(() => {
+		const updateRecipesFromSupabase = async () => {
+			if (data && !isFetching) {
+				console.log("Fetched data from Supabase: ", data);
+				setRecipes(data as Recipe[]);
+				try {
+					await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+				} catch (err) {
+					console.error('Failed to cache Supabase recipes:', err);
+				}
+			}
+		};
 
+		updateRecipesFromSupabase();
+	}, [data, isFetching]);
+
+	// Add a new recipe and cache it
 	const addRecipe = async (newRecipe: Recipe) => {
 		const updatedRecipes = [...recipes, newRecipe];
-		setRecipes((prev) => [...prev, newRecipe]);
-
+		setRecipes(updatedRecipes);
 		try {
-			await AsyncStorage.setItem(
-				'recipes',
-				JSON.stringify(updatedRecipes)
-			);
+			await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedRecipes));
 		} catch (err) {
-			console.error('Failed to save recipe:', err);
+			console.error('Failed to save new recipe:', err);
 		}
 	};
 
-	// Update an existing recipe by name
-	const updateRecipe = (name: string, updatedRecipe: Partial<Recipe>) => {
-		setRecipes((prev) =>
-			prev.map((recipe) =>
-				recipe.name === name ? { ...recipe, ...updatedRecipe } : recipe
-			)
+	// Update an existing recipe
+	const updateRecipe = async (name: string, updatedRecipe: Partial<Recipe>) => {
+		const updatedRecipes = recipes.map((recipe) =>
+			recipe.name === name ? { ...recipe, ...updatedRecipe } : recipe
 		);
+		setRecipes(updatedRecipes);
+		try {
+			await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedRecipes));
+		} catch (err) {
+			console.error('Failed to update recipe:', err);
+		}
 	};
 
-	// Toggle a recipe's favorite status
-	const toggleFavorite = (name: string) => {
-		setRecipes((prev) =>
-			prev.map((recipe) =>
-				recipe.name === name
-					? { ...recipe, isFavorite: !recipe.isFavorite }
-					: recipe
-			)
+	// Toggle favorite and persist
+	const toggleFavorite = async (name: string) => {
+		const updatedRecipes = recipes.map((recipe) =>
+			recipe.name === name
+				? { ...recipe, isFavorite: !recipe.isFavorite }
+				: recipe
 		);
+		setRecipes(updatedRecipes);
+		try {
+			await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedRecipes));
+		} catch (err) {
+			console.error('Failed to toggle favorite:', err);
+		}
 	};
-
-	useEffect(() => {
-		if (data && !isFetching) {
-			console.log("Fetched data: ", data);
-			setRecipes(data as Recipe[])
-		}
-		if (isFetching) {
-			console.log("Fetching data...");
-		}
-
-	}, [data, isFetching])
 
 	return (
 		<RecipesContext.Provider
