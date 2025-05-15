@@ -19,6 +19,7 @@ export type Recipe = {
 	};
 	isFavorite?: boolean;
 	rating: number;
+	id: string;
 };
 
 type RecipesContextType = {
@@ -26,7 +27,7 @@ type RecipesContextType = {
 	recipes: Recipe[];
 	setRecipes: React.Dispatch<React.SetStateAction<Recipe[]>>;
 	addRecipe: (recipe: Recipe) => void;
-	updateRecipe: (name: string, updatedRecipe: Partial<Recipe>) => void;
+	updateRecipe: (id: string, updatedRecipe: Partial<Recipe>) => void;
 	toggleFavorite: (name: string) => void;
 };
 

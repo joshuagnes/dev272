@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/slider';
 import { ScrollView } from 'react-native';
 import { Textarea, TextareaInput } from '@/components/ui/textarea';
-
-
+import { useAddRecipe } from '@/hooks/useAddRecipe';
+import { v4 as uuidv4 } from 'uuid';
 
 // Validation schema for the restaurant form
 const RecipeSchema = (existingNames: string[]) =>
@@ -46,7 +46,8 @@ const RecipeSchema = (existingNames: string[]) =>
 
 const AddRecipe = () => {
 	const navigation = useNavigation();
-	const { addRecipe, recipes } = useRecipes();
+	const { recipes } = useRecipes();
+	const addRecipe = useAddRecipe();
 
 	return (
 		<Box className="flex-1 p-4 dark:bg-neutral-950 ">
@@ -81,8 +82,9 @@ const AddRecipe = () => {
 							return;
 						}
 
-						addRecipe({
+						addRecipe.mutate({
 							// id: Date.now().toString(), //generate a unique id by timestamp
+							id: uuidv4(),
 							name: values.name,
 							description: values.description,
 							ingredients: values.ingredients

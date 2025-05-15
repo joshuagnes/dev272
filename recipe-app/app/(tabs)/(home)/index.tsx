@@ -9,6 +9,7 @@ import { useRecipes } from '@/context/RecipesContext';
 import { InputField, InputIcon, Input } from '@/components/ui/input';
 import { Button, ButtonText } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import 'react-native-get-random-values';
 
 export default function HomeScreen() {
 	const [searchInput, setSearchInput] = useState('');
