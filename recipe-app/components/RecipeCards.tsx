@@ -5,8 +5,7 @@ import { Text } from "./ui/text";
 import { Card } from "@/components/ui/card";
 import { useRecipes, Recipe } from "@/context/RecipesContext";
 import { Heading } from "./ui/heading";
-import { Pressable } from "./ui/pressable";
-import { FavouriteIcon, Icon } from "./ui/icon";
+import FavoriteButton from "./FavoriteButton";
 
 const RecipeCards: React.FC<Recipe> = ({
   name,
@@ -24,13 +23,7 @@ const RecipeCards: React.FC<Recipe> = ({
     router.push({
       pathname: "/(tabs)/(home)/[title]",
       params: {
-        title: name,
-        description,
-        ingredients: JSON.stringify(ingredients),
-        instructions: JSON.stringify(instructions),
-        prepTime: time.prep.toString(),
-        cookTime: time.cook.toString(),
-        rating,
+        title: name
       },
     });
   };
@@ -38,15 +31,10 @@ const RecipeCards: React.FC<Recipe> = ({
   return (
     <Card size="md" variant="elevated" className="m-2 rounded-lg">
       <Heading className="mb-2">{name}</Heading>
-      <Pressable onPress={() => toggleFavorite(name)}>
-        <Icon
-          as={FavouriteIcon}
-          size="xl"
-          className={`${
-            isFavorite ? "text-red-500" : "text-gray-500"
-          } absolute right-4 bottom-2`}
-        />
-      </Pressable>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        handleFavoriteToggle={() => toggleFavorite(name)}
+      />
       <Text className="text-md my-1 dark:text-white">
         Description: {description}
       </Text>

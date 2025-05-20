@@ -24,7 +24,7 @@ type ThemeContextType = {
 
 export const ThemeContext = createContext<ThemeContextType>({
   colorMode: "light",
-  toggleColorMode: () => {},
+  toggleColorMode: () => { },
 });
 
 const queryClient = new QueryClient();
