@@ -1,0 +1,264 @@
+{
+	"recipes": [
+		{
+			"name": "Spaghetti Carbonara",
+			"description": "A simple Roman pasta dish with egg, cheese, pancetta, and pepper.",
+			"ingredients": [
+				"200g spaghetti",
+				"100g pancetta",
+				"2 large eggs",
+				"50g parmesan cheese",
+				"Black pepper",
+				"Salt"
+			],
+			"instructions": [
+				"Cook spaghetti in salted boiling water until al dente.",
+				"Fry pancetta in a pan until crispy.",
+				"Whisk eggs with grated parmesan and black pepper in a bowl.",
+				"Drain pasta, reserving some cooking water.",
+				"Mix pasta with pancetta, then remove from heat and stir in egg mixture, adding reserved water if needed.",
+				"Serve immediately with extra parmesan and pepper."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 15
+			},
+			"isFavorite": false,
+			"rating": 4.5
+		},
+		{
+			"name": "Classic Cheeseburger",
+			"description": "Juicy beef burger with cheddar cheese on a toasted bun.",
+			"ingredients": [
+				"1 beef patty",
+				"2 slices cheddar cheese",
+				"1 hamburger bun",
+				"Lettuce",
+				"Tomato",
+				"Pickles",
+				"Ketchup",
+				"Mustard"
+			],
+			"instructions": [
+				"Preheat grill or skillet to medium-high heat.",
+				"Season beef patty with salt and pepper, then grill for 3-4 minutes per side.",
+				"Place cheddar cheese on patty during the last minute of cooking.",
+				"Toast hamburger bun on the grill.",
+				"Assemble burger with lettuce, tomato, pickles, ketchup, and mustard.",
+				"Serve immediately."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 8
+			},
+			"isFavorite": false,
+			"rating": 4
+		},
+		{
+			"name": "French Omelette",
+			"description": "Classic smooth and tender omelette.",
+			"ingredients": [
+				"3 eggs",
+				"1 tbsp butter",
+				"Salt",
+				"Pepper",
+				"Fresh herbs (optional)"
+			],
+			"instructions": [
+				"Whisk eggs with a pinch of salt and pepper until smooth.",
+				"Melt butter in a non-stick skillet over medium-low heat.",
+				"Pour eggs into the skillet and stir gently with a spatula.",
+				"Cook until the edges set but the center is still soft.",
+				"Fold omelette in half and slide onto a plate.",
+				"Garnish with fresh herbs if desired."
+			],
+			"time": {
+				"prep": 3,
+				"cook": 5
+			},
+			"isFavorite": false,
+			"rating": 5
+		},
+		{
+			"name": "Avocado Toast",
+			"description": "Simple and healthy toast with mashed avocado.",
+			"ingredients": [
+				"2 slices sourdough bread",
+				"1 ripe avocado",
+				"Salt",
+				"Black pepper",
+				"Chili flakes (optional)",
+				"Lemon juice"
+			],
+			"instructions": [
+				"Toast sourdough bread until golden.",
+				"Mash avocado with a fork and mix with a squeeze of lemon juice.",
+				"Spread avocado mixture on toasted bread.",
+				"Sprinkle with salt, black pepper, and chili flakes if using.",
+				"Serve immediately."
+			],
+			"time": {
+				"prep": 5,
+				"cook": 3
+			},
+			"isFavorite": false,
+			"rating": 4
+		},
+		{
+			"name": "Miso Soup",
+			"description": "Traditional Japanese soup with tofu, seaweed, and miso paste.",
+			"ingredients": [
+				"3 cups dashi stock",
+				"2 tbsp miso paste",
+				"100g silken tofu",
+				"2 tbsp wakame seaweed",
+				"2 green onions"
+			],
+			"instructions": [
+				"Heat dashi stock in a pot until simmering.",
+				"Add wakame seaweed and simmer for 1 minute.",
+				"Add cubed tofu and cook for another minute.",
+				"Dissolve miso paste in a small amount of hot stock, then stir into the pot.",
+				"Add chopped green onions and remove from heat.",
+				"Serve hot."
+			],
+			"time": {
+				"prep": 5,
+				"cook": 15
+			},
+			"isFavorite": false,
+			"rating": 4
+		},
+		{
+			"name": "Beef Tacos",
+			"description": "Soft corn tortillas filled with seasoned ground beef.",
+			"ingredients": [
+				"200g ground beef",
+				"1 packet taco seasoning",
+				"6 corn tortillas",
+				"Lettuce",
+				"Sour cream",
+				"Shredded cheese",
+				"Salsa"
+			],
+			"instructions": [
+				"Cook ground beef in a skillet over medium heat until browned.",
+				"Add taco seasoning and water as per packet instructions, then simmer.",
+				"Warm corn tortillas in a dry skillet or microwave.",
+				"Spoon beef mixture onto tortillas.",
+				"Top with lettuce, sour cream, cheese, and salsa.",
+				"Serve immediately."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 15
+			},
+			"isFavorite": false,
+			"rating": 3.5
+		},
+		{
+			"name": "Tomato Basil Soup",
+			"description": "Creamy soup made with ripe tomatoes and fresh basil.",
+			"ingredients": [
+				"500g ripe tomatoes",
+				"1 onion",
+				"2 garlic cloves",
+				"500ml vegetable broth",
+				"Fresh basil",
+				"Salt and pepper",
+				"Olive oil"
+			],
+			"instructions": [
+				"Heat olive oil in a pot and sauté chopped onion and garlic until soft.",
+				"Add chopped tomatoes and cook until they break down.",
+				"Pour in vegetable broth and simmer for 20 minutes.",
+				"Blend soup until smooth using an immersion blender.",
+				"Stir in chopped basil, salt, and pepper.",
+				"Serve hot with extra basil on top."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 30
+			},
+			"isFavorite": false,
+			"rating": 4
+		},
+		{
+			"name": "Shrimp Fried Rice",
+			"description": "Stir-fried rice with shrimp, vegetables, and soy sauce.",
+			"ingredients": [
+				"2 cups cooked rice",
+				"200g shrimp, peeled",
+				"2 eggs",
+				"1/2 cup peas and carrots",
+				"3 tbsp soy sauce",
+				"2 green onions"
+			],
+			"instructions": [
+				"Heat oil in a large skillet or wok over medium-high heat.",
+				"Add shrimp and cook until pink, then remove from skillet.",
+				"Scramble eggs in the skillet and set aside.",
+				"Add peas, carrots, and green onions, stir-frying until tender.",
+				"Add rice and soy sauce, stirring to combine.",
+				"Return shrimp and eggs to the skillet, mix well, and serve."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 15
+			},
+			"isFavorite": false,
+			"rating": 5
+		},
+		{
+			"name": "Caprese Salad",
+			"description": "Italian salad with fresh tomatoes, mozzarella, and basil.",
+			"ingredients": [
+				"2 ripe tomatoes",
+				"125g fresh mozzarella",
+				"Fresh basil leaves",
+				"Olive oil",
+				"Salt lately.",
+				"Balsamic glaze (optional)"
+			],
+			"instructions": [
+				"Slice tomatoes and mozzarella into even slices.",
+				"Arrange tomato and mozzarella slices alternately on a plate.",
+				"Tuck fresh basil leaves between the slices.",
+				"Drizzle with olive oil and balsamic glaze, if using.",
+				"Sprinkle with salt and pepper.",
+				"Serve immediately."
+			],
+			"time": {
+				"prep": 5,
+				"cook": 0
+			},
+			"isFavorite": false,
+			"rating": 4
+		},
+		{
+			"name": "Chicken Teriyaki",
+			"description": "Japanese-style grilled chicken glazed with sweet soy-based sauce.",
+			"ingredients": [
+				"2 chicken thighs",
+				"3 tbsp soy sauce",
+				"2 tbsp mirin",
+				"2 tbsp sake",
+				"1 tbsp sugar"
+			],
+			"instructions": [
+				"Mix soy sauce, mirin, sake, and sugar to make the teriyaki sauce.",
+				"Marinate chicken thighs in half the sauce for 10 minutes.",
+				"Heat a skillet over medium heat and cook chicken skin-side down until golden.",
+				"Flip chicken and add remaining sauce, cooking until sauce thickens.",
+				"Slice chicken and drizzle with sauce.",
+				"Serve with rice or vegetables."
+			],
+			"time": {
+				"prep": 10,
+				"cook": 20
+			},
+			"isFavorite": false,
+			"rating": 4.5
+		}
+	]
+}

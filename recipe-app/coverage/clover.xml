@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1747720964224" clover="3.2.0">
+  <project timestamp="1747720964224" name="All files">
+    <metrics statements="141" coveredstatements="135" conditionals="26" coveredconditionals="14" methods="7" coveredmethods="5" elements="174" coveredelements="154" complexity="0" loc="141" ncloc="141" packages="5" files="7" classes="7"/>
+    <package name="components">
+      <metrics statements="5" coveredstatements="5" conditionals="14" coveredconditionals="8" methods="2" coveredmethods="2"/>
+      <file name="FavoriteButton.tsx" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/components/FavoriteButton.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+      </file>
+      <file name="ThemedText.tsx" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/components/ThemedText.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="11" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.ui.icon">
+      <metrics statements="123" coveredstatements="118" conditionals="8" coveredconditionals="4" methods="3" coveredmethods="1"/>
+      <file name="index.tsx" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/components/ui/icon/index.tsx">
+        <metrics statements="123" coveredstatements="118" conditionals="8" coveredconditionals="4" methods="3" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="59" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="135" count="1" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+        <line num="165" count="1" type="stmt"/>
+        <line num="168" count="1" type="stmt"/>
+        <line num="189" count="1" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="233" count="1" type="stmt"/>
+        <line num="254" count="1" type="stmt"/>
+        <line num="255" count="1" type="stmt"/>
+        <line num="256" count="1" type="stmt"/>
+        <line num="257" count="1" type="stmt"/>
+        <line num="261" count="1" type="stmt"/>
+        <line num="284" count="1" type="stmt"/>
+        <line num="288" count="1" type="stmt"/>
+        <line num="309" count="1" type="stmt"/>
+        <line num="313" count="1" type="stmt"/>
+        <line num="382" count="1" type="stmt"/>
+        <line num="386" count="1" type="stmt"/>
+        <line num="401" count="1" type="stmt"/>
+        <line num="422" count="1" type="stmt"/>
+        <line num="423" count="1" type="stmt"/>
+        <line num="427" count="1" type="stmt"/>
+        <line num="443" count="1" type="stmt"/>
+        <line num="458" count="1" type="stmt"/>
+        <line num="473" count="1" type="stmt"/>
+        <line num="489" count="1" type="stmt"/>
+        <line num="511" count="1" type="stmt"/>
+        <line num="533" count="1" type="stmt"/>
+        <line num="555" count="1" type="stmt"/>
+        <line num="556" count="1" type="stmt"/>
+        <line num="557" count="1" type="stmt"/>
+        <line num="558" count="1" type="stmt"/>
+        <line num="559" count="1" type="stmt"/>
+        <line num="560" count="1" type="stmt"/>
+        <line num="561" count="1" type="stmt"/>
+        <line num="573" count="1" type="stmt"/>
+        <line num="588" count="1" type="stmt"/>
+        <line num="592" count="1" type="stmt"/>
+        <line num="613" count="1" type="stmt"/>
+        <line num="617" count="1" type="stmt"/>
+        <line num="638" count="1" type="stmt"/>
+        <line num="665" count="1" type="stmt"/>
+        <line num="666" count="1" type="stmt"/>
+        <line num="670" count="1" type="stmt"/>
+        <line num="691" count="1" type="stmt"/>
+        <line num="695" count="1" type="stmt"/>
+        <line num="722" count="1" type="stmt"/>
+        <line num="725" count="1" type="stmt"/>
+        <line num="746" count="1" type="stmt"/>
+        <line num="749" count="1" type="stmt"/>
+        <line num="770" count="1" type="stmt"/>
+        <line num="772" count="1" type="stmt"/>
+        <line num="805" count="1" type="stmt"/>
+        <line num="808" count="1" type="stmt"/>
+        <line num="823" count="1" type="stmt"/>
+        <line num="826" count="1" type="stmt"/>
+        <line num="853" count="1" type="stmt"/>
+        <line num="856" count="1" type="stmt"/>
+        <line num="901" count="1" type="stmt"/>
+        <line num="904" count="1" type="stmt"/>
+        <line num="931" count="1" type="stmt"/>
+        <line num="934" count="1" type="stmt"/>
+        <line num="961" count="1" type="stmt"/>
+        <line num="964" count="1" type="stmt"/>
+        <line num="985" count="1" type="stmt"/>
+        <line num="987" count="1" type="stmt"/>
+        <line num="1014" count="1" type="stmt"/>
+        <line num="1017" count="1" type="stmt"/>
+        <line num="1032" count="1" type="stmt"/>
+        <line num="1035" count="1" type="stmt"/>
+        <line num="1056" count="1" type="stmt"/>
+        <line num="1059" count="1" type="stmt"/>
+        <line num="1080" count="1" type="stmt"/>
+        <line num="1083" count="1" type="stmt"/>
+        <line num="1110" count="1" type="stmt"/>
+        <line num="1113" count="1" type="stmt"/>
+        <line num="1128" count="1" type="stmt"/>
+        <line num="1132" count="1" type="stmt"/>
+        <line num="1147" count="1" type="stmt"/>
+        <line num="1150" count="1" type="stmt"/>
+        <line num="1165" count="1" type="stmt"/>
+        <line num="1168" count="1" type="stmt"/>
+        <line num="1183" count="1" type="stmt"/>
+        <line num="1186" count="1" type="stmt"/>
+        <line num="1207" count="1" type="stmt"/>
+        <line num="1210" count="1" type="stmt"/>
+        <line num="1225" count="1" type="stmt"/>
+        <line num="1228" count="1" type="stmt"/>
+        <line num="1261" count="1" type="stmt"/>
+        <line num="1263" count="1" type="stmt"/>
+        <line num="1302" count="1" type="stmt"/>
+        <line num="1305" count="1" type="stmt"/>
+        <line num="1326" count="1" type="stmt"/>
+        <line num="1329" count="1" type="stmt"/>
+        <line num="1350" count="1" type="stmt"/>
+        <line num="1353" count="1" type="stmt"/>
+        <line num="1392" count="1" type="stmt"/>
+        <line num="1395" count="1" type="stmt"/>
+        <line num="1416" count="1" type="stmt"/>
+        <line num="1419" count="1" type="stmt"/>
+        <line num="1434" count="1" type="stmt"/>
+        <line num="1437" count="1" type="stmt"/>
+        <line num="1500" count="1" type="stmt"/>
+        <line num="1503" count="1" type="stmt"/>
+        <line num="1530" count="1" type="stmt"/>
+        <line num="1533" count="1" type="stmt"/>
+        <line num="1560" count="1" type="stmt"/>
+        <line num="1563" count="1" type="stmt"/>
+        <line num="1584" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.ui.pressable">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/components/ui/pressable/index.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="constants">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Colors.ts" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/constants/Colors.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="hooks">
+      <metrics statements="5" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="useColorScheme.ts" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/hooks/useColorScheme.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="useThemeColor.ts" path="/Users/joshuawang/Desktop/DEV272/dev272/recipe-app/hooks/useThemeColor.ts">
+        <metrics statements="5" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
